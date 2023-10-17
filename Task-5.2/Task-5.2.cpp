@@ -3,78 +3,63 @@
 
 #include <iostream>
 
-class Triangle {
-protected:
-	int a, b, c;
-	int A, B, C;
-	std::string name;
 
-public:
-	Triangle() {
-		a = 20; b = 30; c = 40;
-		A = 50; B = 60; C = 70;
-		name = "Треугольник";
-	}
-	int get_a() {
-		return a;
-	}
-	int get_b() {
-		return b;
-	}
-	int get_c() {
-		return c;
-	}
-	int get_A() {
-		return A;
-	}
-	int get_B() {
-		return B;
-	}
-	int get_C() {
-		return C;
-	}
-
-	std::string get_name() {
-		return name;
-	}
-};
-class Quadrangl {
+class Figure {
 protected:
 	int a, b, c, d;
 	int A, B, C, D;
 	std::string name;
 public:
+	Figure() {
+		a = 0; b = 0; c = 0; d = 0;
+		A = 0; B = 0; C = 0; D = 0;
+		name = "Фигура";
+	}
+	Figure(int a, int b, int c, int d, int A, int B, int C, int D) {
+		this->a = a; this->b = b; this->c = c; this->d = d;
+		this->A = A; this->B = B; this->C = C; this->D = D;
+		name = "Фигура";
+	}
+	virtual void print_info(Figure* figure) {
+		std::cout << name << ": \n";
+		std::cout << "Стороны: a = " << a << " b = " << b << " c = " << c << " d = " << d << '\n';
+		std::cout << "Углы: A = " << A << " B = " << B << " C = " << C << " D = " << D << '\n';
+	}
+};
+
+
+class Triangle : public Figure {
+public:
+	Triangle() {
+		name = "Треугольник";
+	}
+	Triangle(int a, int b, int c, int A, int B, int C) {
+		this->a = a; this->b = b; this->c = c;
+		this->A = A; this->B = B; this->C = C;
+		name = "Треугольник";
+	}
+	void print_info(Figure* figure) override {
+		std::cout << name << ": \n";
+		std::cout << "Стороны: a = " << a << " b = " << b << " c = " << c << '\n';
+		std::cout << "Углы: A = " << A << " B = " << B << " C = " << C << '\n';
+	}
+};
+
+
+class Quadrangl : public Figure {
+public:
 	Quadrangl() {
-		a = 10; b = 20; c = 30; d = 40;
-		A = 50; B = 60; C = 70; D = 80;
 		name = "Четырёхугольник";
 	}
-	int get_a() {
-		return a;
+	Quadrangl(int a, int b, int c, int d, int A, int B, int C, int D) {
+		this->a = a; this->b = b; this->c = c; this->d = d;
+		this->A = A; this->B = B; this->C = C; this->D = D;
+		name = "Четырёхугольник";
 	}
-	int get_b() {
-		return b;
-	}
-	int get_c() {
-		return c;
-	}
-	int get_d() {
-		return d;
-	}
-	int get_A() {
-		return A;
-	}
-	int get_B() {
-		return B;
-	}
-	int get_C() {
-		return C;
-	}
-	int get_D() {
-		return D;
-	}
-	std::string get_name() {
-		return name;
+	void print_info(Figure* figure) override {
+		std::cout << name << ": \n";
+		std::cout << "Стороны: a = " << a << " b = " << b << " c = " << c << " d = " << d << '\n';
+		std::cout << "Углы: A = " << A << " B = " << B << " C = " << C << " D = " << D << '\n';
 	}
 };
 
@@ -85,105 +70,127 @@ public:
 		C = 90;
 		name = "Прямоугольный треугольник";
 	}
+	Right_triangle(int a, int b, int c, int A, int B) {
+		this->a = a; this->b = b; this->c = c;
+		this->A = A; this->B = B;
+		C = 90;
+		name = "Прямоугольный треугольник";
+	}
 };
+
+
 class Isosceles_triangle : public Triangle {
 public:
 	Isosceles_triangle() {
+		name = "Равнобедренный треугольник";
+	}
+	Isosceles_triangle(int a, int b, int A, int B) {
+		this->a = a; this->b = b;
+		this->A = A; this->B = B;
 		c = a;
 		C = B;
 		name = "Равнобедренный треугольник";
 	}
 };
 
+
 class Equal_triangle : public Triangle {
 public:
 	Equal_triangle() {
+		A = 60; B = A; C = A;
+		name = "Равносторонний треугольник";
+	}
+	Equal_triangle(int b) {
+		this->b = b;
 		a = b; c = b;
 		A = 60; B = A; C = A;
 		name = "Равносторонний треугольник";
 	}
 };
 
+
 class Restangle : public Quadrangl {
 public:
 	Restangle() {
+		A = 90; B = A; C = A; D = A;
+		name = "Прямоугольник";
+	}
+	Restangle(int a, int b) {
+		this->a = a; this->b = b;
 		c = a; d = b;
 		A = 90; B = A; C = A; D = A;
 		name = "Прямоугольник";
 	}
 };
 
+
 class Square : public Restangle {
 public:
 	Square() {
-		d = a; b = a;
+		name = "Квадрат";
+	}
+	Square(int a) {
+		this->a = a;
+		c = a; d = a; b = a;
 		name = "Квадрат";
 	}
 };
 
+
 class Parallelogram : public Quadrangl {
 public:
 	Parallelogram() {
+		name = "Параллелограм";
+	}
+	Parallelogram(int a, int b, int A, int B) {
+		this->a = a; this->b = b;
+		this->A = A; this->B = B;
 		c = a; d = b;
 		C = A; D = B;
 		name = "Параллелограм";
 	}
 };
 
+
 class Rhomb : public Parallelogram {
 public:
 	Rhomb() {
-		d = a; b = a;
+		name = "Ромб";
+	}
+	Rhomb(int a, int A, int B) {
+		this->a = a;
+		this->A = A; this->B = B;
+		c = a; d = a; b = a;
+		C = A; D = B;
 		name = "Ромб";
 	}
 };
 
-void print_info_triangle(Triangle* triangle) {
-	std::cout << triangle->get_name() << ": \n";
-	std::cout << "Стороны: a = " << triangle->get_a() << " b = " << triangle->get_b() << " c = " << triangle->get_c() << '\n';
-	std::cout << "Углы: A = " << triangle->get_A() << " B = " << triangle->get_B() << " C = " << triangle->get_C() << '\n';
-	std::cout << "\n";
-}
-
-void print_info_quadrangl(Quadrangl* quadrangl) {
-	std::cout << quadrangl->get_name() << ": \n";
-	std::cout << "Стороны: a = " << quadrangl->get_a() << " b = " << quadrangl->get_b() << " c = " << quadrangl->get_c() << " d = " << quadrangl->get_d() << '\n';
-	std::cout << "Углы: A = " << quadrangl->get_A() << " B = " << quadrangl->get_B() << " C = " << quadrangl->get_C() << " D = " << quadrangl->get_D() << '\n';
-	std::cout << "\n";
-}
-
-
-
-
-
-
-
-
-
 
 int main() {
 
-	setlocale(LC_ALL,"Russian");
+	setlocale(LC_ALL, "Russian");
 	system("chcp 1251");
 
-	Triangle triangle;
-	print_info_triangle(&triangle);
-	Right_triangle right_triangle;
-	print_info_triangle(&right_triangle);
-	Isosceles_triangle isosceles_triangle;
-	print_info_triangle(&isosceles_triangle);
-	Equal_triangle equal_triangle;
-	print_info_triangle(&equal_triangle);
-	Quadrangl quadrangl;
-	print_info_quadrangl(&quadrangl);
-	Restangle restangle;
-	print_info_quadrangl(&restangle);
-	Square square;
-	print_info_quadrangl(&square);
-	Parallelogram parallelogram;
-	print_info_quadrangl(&parallelogram);
-	Rhomb rhomb;
-	print_info_quadrangl(&rhomb);
+	Triangle triangle{ 10, 20, 30, 50, 60, 70 };
+	triangle.print_info(&triangle);
+	Right_triangle right_triangle{ 10, 20, 30, 40, 50 };
+	right_triangle.print_info(&right_triangle);
+	Isosceles_triangle isosceles_triangle{ 10, 20, 50, 60 };
+	isosceles_triangle.print_info(&isosceles_triangle);
+	Equal_triangle equal_triangle{ 30 };
+	equal_triangle.print_info(&equal_triangle);
+	Quadrangl quadrangl{ 10, 20, 30, 40, 50, 60, 70, 80 };
+	quadrangl.print_info(&quadrangl);
+	Restangle restangle{ 10,20 };
+	restangle.print_info(&restangle);
+	Square square{ 20 };
+	square.print_info(&square);
+	Parallelogram parallelogram{ 20,30,30,40 };
+	parallelogram.print_info(&parallelogram);
+	Rhomb rhomb{ 30, 30, 40 };
+	rhomb.print_info(&rhomb);
+
 
 
 
