@@ -6,8 +6,6 @@
 
 class Figure {
 protected:
-	int a, b, c, d;
-	int A, B, C, D;
 	std::string name;
 public:
 	Figure() {
@@ -15,16 +13,18 @@ public:
 	}
 	virtual void print_info() {
 		std::cout << name << ": \n";
-		std::cout << "Стороны: a = " << a << " b = " << b << " c = " << c << " d = " << d << '\n';
-		std::cout << "Углы: A = " << A << " B = " << B << " C = " << C << " D = " << D << '\n';
 	}
 };
 
 
 class Triangle : public Figure {
 public:
+	int a, b, c;
+	int A, B, C;
 	Triangle() {
 		name = "Треугольник";
+		a = 0; b = 0; c = 0;
+		A = 0; B = 0; C = 0;
 	}
 	Triangle(int a, int b, int c, int A, int B, int C) {
 		this->a = a; this->b = b; this->c = c;
@@ -41,8 +41,12 @@ public:
 
 class Quadrangl : public Figure {
 public:
+	int a, b, c, d;
+	int A, B, C, D;
 	Quadrangl() {
 		name = "Четырёхугольник";
+		a = 0; b = 0; c = 0; d = 0;
+		A = 0; B = 0; C = 0; D = 0;
 	}
 	Quadrangl(int a, int b, int c, int d, int A, int B, int C, int D) {
 		this->a = a; this->b = b; this->c = c; this->d = d;
