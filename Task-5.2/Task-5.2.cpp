@@ -18,9 +18,10 @@ public:
 
 
 class Triangle : public Figure {
-public:
+protected:
 	int a, b, c;
 	int A, B, C;
+public:
 	Triangle() {
 		name = "Треугольник";
 		a = 0; b = 0; c = 0;
@@ -40,9 +41,10 @@ public:
 
 
 class Quadrangl : public Figure {
-public:
+protected:
 	int a, b, c, d;
 	int A, B, C, D;
+public:
 	Quadrangl() {
 		name = "Четырёхугольник";
 		a = 0; b = 0; c = 0; d = 0;
